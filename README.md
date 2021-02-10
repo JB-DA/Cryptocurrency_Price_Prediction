@@ -1,4 +1,4 @@
-![CryptoHeader](/static/header.png)
+![CryptoHeader](/resources/header.png)
 ### CRYPTOCURRENCY PRICE PREDICTION with MACHINE LEARNING
 > An adventure in predicting future prices of cryptocurrency
 
