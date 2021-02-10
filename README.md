@@ -11,7 +11,7 @@ While this project may not yield applicable models & predictions, it is an inter
 * [Resources](#--resources--)
 * [Contributors](#--contributors--)
 
-##### **- TASKS -**
+#### **- TASKS -**
  - [ ] Design Database
 	 - [ ] Type
 	 - [ ] ERD
@@ -47,12 +47,11 @@ While this project may not yield applicable models & predictions, it is an inter
 	 - [ ] Menus
 	 - [ ] Visualisations
 
-##### **- RESOURCES -**
-[CoinAPI.io](https://www.coinapi.io/)
+#### **- RESOURCES -**
+* [CoinAPI.io](https://www.coinapi.io/)
+* [The CoinDesk 20](https://www.coindesk.com/coindesk20)
 
-[The CoinDesk 20](https://www.coindesk.com/coindesk20)
-
-##### **- CONTRIBUTORS -**
+#### **- CONTRIBUTORS -**
 * Divya [@github/divyagururajansumangala](https://github.com/divyagururajansumangala)
 * JB [@github/JB-DA](https://github.com/JB-DA)
 
