@@ -49,6 +49,7 @@ While this project may not yield applicable models & predictions, it is an inter
 
 ##### **- RESOURCES -**
 [CoinAPI.io](https://www.coinapi.io/)
+
 [The CoinDesk 20](https://www.coindesk.com/coindesk20)
 
 ##### **- CONTRIBUTORS -**
