@@ -1,0 +1,6 @@
+*.DS_Store
+*.lnk
+*checkpoint*
+*pycache*
+*dev*
+.vscode
