@@ -10,10 +10,10 @@ The popularity of cryptocurrencies increased exponentially in 2017 due to severa
 Machine learning can work through many problems, but its application in predicting crypto prices may be limited by several factors. As cryptocurrencies are decentralised, they have more factors that influence their price than traditional assets, which can make modelling & predictions very hard. Some factors affecting cryptocurrencies are technological progress, political pressures, security, consumer sentiment, sheer variety of currencies etc. Their high volatility can be very rewarding if they are traded at the correct time. Unfortunately, due to their lack of indexes, cryptocurrencies are relatively unpredictable compared to traditional financial models.
 
 * [Synopsis](#--synopsis--)
-* [Project Summary](#--project_summary--)
+* [Project Summary](#--project-summary--)
 * [Resources](#--resources--)
 * [Contributors](#--contributors--)
-* [Task List](#--task_list--)
+* [Task List](#--task-list--)
 
 ##### **- SYNOPSIS-**
 
