@@ -1,0 +1,66 @@
+assets
+-
+asset_id VARCHAR PK FK >- historic_trades.asset_id
+name VARCHAR
+type_is_crypto INT
+data_quote_start VARCHAR
+data_quote_end VARCHAR
+data_orderbook_start VARCHAR
+data_orderbook_end VARCHAR
+data_trade_start VARCHAR
+data_trade_end VARCHAR
+data_quote_count VARCHAR
+data_trade_count VARCHAR
+data_symbols_count INT
+volume_1hrs_usd FLOAT
+volume_1day_usd FLOAT
+volume_1mth_usd FLOAT
+price_usd FLOAT
+
+periods
+-
+period_id VARCHAR
+length_seconds INT
+length_months INT
+unit_count INT
+unit_name VARCHAR
+display_name VARCHAR
+
+current_rates
+-
+time VARCHAR
+asset_id_base VARCHAR FK >- assets.asset_id
+asset_id_quote VARCHAR
+rate FLOAT
+
+exchanges
+-
+exchange_id VARCHAR
+website VARCHAR
+name VARCHAR
+data_start VARCHAR
+data_end VARCHAR
+data_quote_start VARCHAR
+data_quote_end VARCHAR
+data_orderbook_start VARCHAR
+data_orderbook_end VARCHAR
+data_trade_start VARCHAR
+data_trade_end VARCHAR
+data_symbols_count INT
+volume_1hrs_usd FLOAT
+volume_1day_usd FLOAT
+volume_1mth_usd FLOAT
+
+historic_trades
+- 
+asset_id  VARCHAR
+time_period_start VARCHAR
+time_period_end VARCHAR
+time_open VARCHAR
+time_close VARCHAR
+price_open FLOAT
+price_high FLOAT
+price_low FLOAT
+price_close FLOAT
+volume_traded FLOAT
+trades_count INT
