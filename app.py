@@ -1,27 +1,35 @@
 
-from flask import Flask, jsonify, render_template, url_for, redirect 
+#from flask import Flask, jsonify, render_template, url_for, redirect
+from flask import Flask, jsonify, render_template
+import sqlite3
+from sqlalchemy import create_engine
+import pandas as pd
+import json
 
-##### DATABASE SETUP
+
+# DATABASE SETUP
 ###
 #
-#engine = create_engine(f"postgresql://postgres:postgres@localhost:5432/crypto_analysis_db")
-#Base = automap_base()
-#Base.prepare(engine, reflect=True)
 
-
-##### FLASK SETUP
+# FLASK SETUP
 ###
 #
 app = Flask(__name__, template_folder='static', static_folder='static')
 
 
-##### ROUTES
+# ROUTES
 ###
 #
 # API Pages
-#@app.route("/")
-#def api_overview():
-#    return jsonify(json_overview)
+@app.route("/api/assets")
+def api_overview():
+    con = sqlite3.connect("crypto_db.sqlite")
+    df = pd.read_sql_query("SELECT * from historic_trades WHERE asset_id='brentoil'", con)
+    json_assets = json.loads(df.to_json(orient='records'))
+    #df_csv.to_sql("historic_trades", con, if_exists="replace")
+    con.close()
+    return jsonify(json_assets)
+
 
 
 # HTML PAGES
@@ -29,7 +37,8 @@ app = Flask(__name__, template_folder='static', static_folder='static')
 def index():
     return render_template('index.html')
 
-##### RUN APP
+
+# RUN APP
 ###
 #
 if __name__ == '__main__':
