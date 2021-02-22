@@ -1,7 +1,9 @@
-alert("The Index Javascript file was loaded...");
+//alert("The Index Javascript file was loaded...");
 
-var coinlist = {};
-let chartURL = "/api/assets";
+var stock = 'BTC'
+
+let chartURL = `/api/assets?asset=${stock}`;
+console.log(chartURL)
 
 function init() { //default graph to Bitcoin
 
@@ -17,7 +19,7 @@ function init() { //default graph to Bitcoin
         var highPrices = [];
         var lowPrices = [];
         var closingPrices = [];
-        var stock = "brentoil"
+        //var stock = "brentoil"
 
         data.forEach(function (d) {
             startDate.push(d.time_period_start);
