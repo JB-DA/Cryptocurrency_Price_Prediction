@@ -1,6 +1,7 @@
 ![CryptoHeader](/resources/rm_header.png)
 ### CRYPTOCURRENCY PRICE PREDICTION with MACHINE LEARNING
 > An adventure in predicting future prices of cryptocurrency
+>
 > [https://cryptoprediction.herokuapp.com/](https://cryptoprediction.herokuapp.com/)
 
 Bitcoin was invented in 2009 by a programmer known as Satoshi Nakamoto. The creation of Bitcoin follows precise rules derived from the gold market. So-called 'miners' competitively use computer resources to solve cryptographic problems and verify the validity of transactions. Success is rewarded by newly issued Bitcoin. The subsequent money creation evolves according to a fixed scheme pre-established by the inventor.
