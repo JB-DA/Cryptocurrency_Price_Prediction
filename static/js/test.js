@@ -31,10 +31,10 @@ function init() { //default graph to Bitcoin
             closingPrices.push(d.price_close);
         });
 
-        var trace1 = {
+        var trace0 = {
             type: "scatter",
             mode: "lines",
-            //name: name,
+            name: "Price",
             x: endDate,
             y: closingPrices,
             line: {
@@ -43,8 +43,9 @@ function init() { //default graph to Bitcoin
         };
 
         // Candlestick Trace
-        var trace2 = {
+        var trace1 = {
             type: "candlestick",
+            name: "Movement",
             x: endDate,
             high: highPrices,
             low: lowPrices,
@@ -52,7 +53,7 @@ function init() { //default graph to Bitcoin
             close: closingPrices
         };
 
-        var data = [trace1, trace2];
+        var data = [trace0, trace1];
         //console.log(data);
 
         var layout = {
@@ -68,9 +69,12 @@ function init() { //default graph to Bitcoin
             },
             yaxis: {
                 autorange: true,
-                type: "linear"
+                type: "linear",
+                hoverformat: '.2f'            
             },
-            showlegend: false
+            width: "1000",
+            height: "500",
+            showlegend: true
         };
 
         Plotly.newPlot("mainchartdiv", data, layout);

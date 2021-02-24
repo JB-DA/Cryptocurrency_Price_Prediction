@@ -1,6 +1,8 @@
 ![CryptoHeader](/resources/rm_header.png)
 ### CRYPTOCURRENCY PRICE PREDICTION with MACHINE LEARNING
 > An adventure in predicting future prices of cryptocurrency
+>
+> [https://cryptoprediction.herokuapp.com/](https://cryptoprediction.herokuapp.com/)
 
 Bitcoin was invented in 2009 by a programmer known as Satoshi Nakamoto. The creation of Bitcoin follows precise rules derived from the gold market. So-called 'miners' competitively use computer resources to solve cryptographic problems and verify the validity of transactions. Success is rewarded by newly issued Bitcoin. The subsequent money creation evolves according to a fixed scheme pre-established by the inventor.
 The value of Bitcoin solely depends on supply and demand. Currently, Bitcoins are actively traded against hard currencies on well-organized virtual exchange markets. These markets remain accessible during week-ends, which is valuable to investors, especially in hectic times.
@@ -33,32 +35,33 @@ Sample Datasets:
 
 ##### **- RESOURCES -**
 
-[CoinAPI.io](https://www.coinapi.io/)
-[The CoinDesk 20](https://www.coindesk.com/coindesk20)
+* [CoinAPI.io](https://www.coinapi.io/)
+* [The CoinDesk 20](https://www.coindesk.com/coindesk20)
 
 ##### **- CONTRIBUTORS -**
+
 * Divya [@github](https://github.com/divyagururajansumangala)
 * JB [@github](https://github.com/JB-DA)
 
 ##### **- TASK LIST -**
 
- - [ ] Design Database
-	 - [ ] Type
-	 - [ ] ERD
-	 - [ ] Schema
-	 - [ ] Tables
-	 - [ ] Columns
+ - [x] Design Database
+	 - [x] Type
+	 - [x] ERD
+	 - [x] Schema
+	 - [x] Tables
+	 - [x] Columns
  
- - [ ] API calls for autonomous historical data collection
-	 - [ ] Single item
-	 - [ ] n items
-	 - [ ] Error catching
-	 - [ ] Storage of data
+ - [x] API calls for autonomous historical data collection
+	 - [x] Single item
+	 - [x] n items
+	 - [x] Error catching
+	 - [x] Storage of data
  
- - [ ] Data Cleaning 
+ - [x] Data Cleaning 
  
- - [ ] Database Load
-	- [ ] Append/Overwrite
+ - [x] Database Load
+	- [x] Append/Overwrite
  
  - [ ] Flask app for calling of data
 	 - [ ] Routes
