@@ -36,7 +36,7 @@ Sample Datasets:
 ##### **- RESOURCES -**
 
 * [CoinAPI.io](https://www.coinapi.io/)
-[The CoinDesk 20](https://www.coindesk.com/coindesk20)
+* [The CoinDesk 20](https://www.coindesk.com/coindesk20)
 
 ##### **- CONTRIBUTORS -**
 
@@ -45,23 +45,23 @@ Sample Datasets:
 
 ##### **- TASK LIST -**
 
- - [ ] Design Database
-	 - [ ] Type
-	 - [ ] ERD
-	 - [ ] Schema
-	 - [ ] Tables
-	 - [ ] Columns
+ - [x] Design Database
+	 - [x] Type
+	 - [x] ERD
+	 - [x] Schema
+	 - [x] Tables
+	 - [x] Columns
  
- - [ ] API calls for autonomous historical data collection
-	 - [ ] Single item
-	 - [ ] n items
-	 - [ ] Error catching
-	 - [ ] Storage of data
+ - [x] API calls for autonomous historical data collection
+	 - [x] Single item
+	 - [x] n items
+	 - [x] Error catching
+	 - [x] Storage of data
  
- - [ ] Data Cleaning 
+ - [x] Data Cleaning 
  
- - [ ] Database Load
-	- [ ] Append/Overwrite
+ - [x] Database Load
+	- [x] Append/Overwrite
  
  - [ ] Flask app for calling of data
 	 - [ ] Routes
