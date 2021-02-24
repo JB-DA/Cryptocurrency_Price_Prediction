@@ -65,13 +65,12 @@ function init() { //default graph to Bitcoin
               },
             xaxis: {
                 range: [startDate, endDate],
-                type: "date",
-                hoverformat: '.2f'
+                type: "date"
             },
             yaxis: {
                 autorange: true,
                 type: "linear",
-                hoverformat: '.2f   '            
+                hoverformat: '.2f'            
             },
             width: "1000",
             height: "500",
