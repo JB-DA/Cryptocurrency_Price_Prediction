@@ -70,7 +70,9 @@ function init() { //default graph to Bitcoin
                 autorange: true,
                 type: "linear"
             },
-            showlegend: false
+            width: "80%",
+            height: "80%",
+            showlegend: True
         };
 
         Plotly.newPlot("mainchartdiv", data, layout);
