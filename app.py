@@ -27,7 +27,7 @@ def api_overview():
     asset = request.args.get('asset')
 
     con = sqlite3.connect("crypto_db.sqlite")
-    df = pd.read_sql_query(f"SELECT * from historic_trades WHERE asset_id='{asset}'", con)
+    df = pd.read_sql_query(f"SELECT * from historic_data WHERE asset_id='{asset}'", con)
     json_assets = json.loads(df.to_json(orient='records'))
     #df_csv.to_sql("historic_trades", con, if_exists="replace")
     con.close()
