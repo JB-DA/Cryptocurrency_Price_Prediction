@@ -1,46 +1,65 @@
-
-### IMPORTS
+##### SYSTEM STUFF
+###
 #
+import warnings
+
+warnings.filterwarnings("ignore")
+
+import sys
+
+
+class Logger(object):
+    def __init__(self):
+        self.terminal = sys.stdout
+        self.log = open("main.log", "a")
+
+    def write(self, message):
+        self.terminal.write(message)
+        self.log.write(message)  
+
+    def flush(self):
+        #this flush method is needed for python 3 compatibility.
+        #this handles the flush command by doing nothing.
+        #you might want to specify some extra behavior here.
+        pass    
+
+sys.stdout = Logger()
+# END
+
+##### IMPORTS
+###
+#
+import datetime
+import glob
+import json
+import math
+import os
+import sqlite3
+import time
+from sqlite3 import Error
+
+import dataframe_image as dfi
+import joblib
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+import requests
 from flask import Flask, jsonify, render_template, request
 from pandas.plotting import lag_plot
 from sklearn.metrics import mean_squared_error
 from sqlalchemy import create_engine
-from sqlite3 import Error
 from statsmodels.graphics.tsaplots import plot_acf, plot_pacf
-from statsmodels.tsa.arima_model import ARIMA
-from statsmodels.tsa.arima_model import ARIMAResults
+from statsmodels.tsa.arima_model import ARIMA, ARIMAResults
 from statsmodels.tsa.stattools import adfuller
-import dataframe_image as dfi
-import datetime
-import glob
-import joblib
-import json
-import matplotlib.pyplot as plt
-import numpy as np
-import os
-import pandas as pd
-import requests
-import sqlite3
-import time
 # END IMPORTS
 
 
-# if save_json == 'yes' json dump
-# else pass
-
-
-
-
-
-
-
-
-
-### VARIABLES
+##### VARIABLE DECLARATION
+###
 #
 # General
 database = r'crypto_db.sqlite'
-coins = ['DOGE', 'BTC', 'ETH', 'LTC']
+coins = ['BTC', 'DOGE', 'ETC', 'LTC', 'XRP']
 apikeys = 'EFA335E9-DA1A-42CC-A498-DFC46281CE85','1C124E08-4D3D-45BC-9EB5-AB1AC5206B47','B44F0242-E0BA-4C1A-BED2-831A67426480', '1830D89F-A633-4F73-9707-3A7FAFE5C0F0', '200EF4DD-8BF3-4A8A-9FC9-CF9C9D6D1173'
 
 # Database Schema
@@ -113,10 +132,11 @@ sql_create_historic_data_table = """ CREATE TABLE IF NOT EXISTS "historic_data" 
     "trades_count" INT   NULL
 );"""
 time.sleep(1)
-# END VARIABLES
+# END VARIABLE DECLARATION
 
 
-### DATABASE CONNECTION
+##### DATABASE CONNECTION
+###
 #
 def create_connection(db_file):
     """ create a database connection to the SQLite database specified by db_file
@@ -133,7 +153,8 @@ def create_connection(db_file):
 # END create_connection
 
 
-### RUN SQL COMMAND
+##### RUN SQL COMMAND
+###
 #
 def execute_sql_cmd(conn, command):
     """ run a sql command statement
@@ -149,7 +170,8 @@ def execute_sql_cmd(conn, command):
 # END execute_sql_cmd
 
 
-### LOAD SCHEMA
+##### LOAD SCHEMA
+###
 #
 conn = create_connection(database)
 
@@ -165,7 +187,8 @@ conn.close()
 # END LOAD SCHEMA
 
 
-### ETL ALL CSVS in 'data_raw'
+##### ETL ALL CSVS in 'data_raw'
+###
 #
 def data_csv_load():
     
@@ -174,14 +197,18 @@ def data_csv_load():
     for csv in csvs:
         df_csv = pd.read_csv(csv)
         df_csv.dropna(inplace = True)
-        df_csv = df_csv.rename(columns = {
-            df_csv.columns[df_csv.columns.str.contains(pat = 'date', case = False)][0]: 'time_period_end',
-            df_csv.columns[df_csv.columns.str.contains(pat = 'open', case = False)][0]: 'price_open',
-            df_csv.columns[df_csv.columns.str.contains(pat = 'high', case = False)][0]: 'price_high',
-            df_csv.columns[df_csv.columns.str.contains(pat = 'low', case = False)][0]: 'price_low',
-            df_csv.columns[df_csv.columns.str.contains(pat = 'close', case = False)][0]: 'price_close',
-            df_csv.columns[df_csv.columns.str.contains(pat = 'vol', case = False)][0]: 'volume_traded',
-        })
+        try:
+            df_csv = df_csv.rename(columns = {
+                df_csv.columns[df_csv.columns.str.contains(pat = 'date', case = False)][0]: 'time_period_end',
+                df_csv.columns[df_csv.columns.str.contains(pat = 'open', case = False)][0]: 'price_open',
+                df_csv.columns[df_csv.columns.str.contains(pat = 'high', case = False)][0]: 'price_high',
+                df_csv.columns[df_csv.columns.str.contains(pat = 'low', case = False)][0]: 'price_low',
+                df_csv.columns[df_csv.columns.str.contains(pat = 'close', case = False)][0]: 'price_close',
+                df_csv.columns[df_csv.columns.str.contains(pat = 'vol', case = False)][0]: 'volume_traded',
+            })
+        except Except as e:
+            print(f'{e}, please check CSV structure for correct column names.')
+
         df_csv['asset_id'] = csvs[csvs.index(csv)].split('\\', 1)[1].split('_', 2)[0]
         df_csv['time_period_end'] = pd.to_datetime(df_csv['time_period_end'], format = '%d/%m/%Y')
         df_csv['time_period_start'] = df_csv['time_period_end'].copy()
@@ -192,12 +219,13 @@ def data_csv_load():
         #    f.write(df_csv.to_json())
 
         conn = create_connection(database)
-        df_csv.to_sql('historic_data', conn, if_exists = 'append', index = False) ##switch to append once dev finished
+        df_csv.to_sql('historic_data', conn, if_exists = 'append', index = False) #switch to append once dev finished
         conn.close()
 # END data_csv_load
 
 
-### ETL ALL API CALL DATA
+##### ETL ALL API CALL DATA
+###
 #
 def data_api_load():
         
@@ -210,8 +238,8 @@ def data_api_load():
     url = f'{endpoint}/assets'
     headers = {'X-CoinAPI-Key': apikeys[0]}
     response = requests.get(url, headers = headers)    
-    with open('data_raw/assets.json', 'w') as ii:
-        json.dump(response.json(), ii)
+    #with open('data_raw/assets.json', 'w') as ii:
+    #    json.dump(response.json(), ii)
     pd.DataFrame(response.json()).to_sql("assets", conn, if_exists = 'replace', index = False)
     
     # EXCHANGES TABLE
@@ -255,12 +283,11 @@ def data_api_load():
         include_empty_items = False
 
         url = f'{endpoint}/ohlcv/{asset_id_base}/{asset_id_quote}/history?period_id={period_id}&time_start={time_start}&limit={limit}&include_empty_items={include_empty_items}'
-
-        headers = {'X-CoinAPI-Key': apikeys[coins.index(coin) + 2]}
+        headers = {'X-CoinAPI-Key': apikeys[coins.index(coin) + 4]}
         response = requests.get(url, headers = headers)
 
-        #with open(f'data_raw/{asset_id_base}.json', 'w') as ii:
-        #    json.dump(response.json(), ii)
+        with open(f'data_raw/{asset_id_base}.json', 'w') as ii:
+            json.dump(response.json(), ii)
         
         df_coin = pd.DataFrame(response.json())
         df_coin['asset_id'] = coin
@@ -270,23 +297,35 @@ def data_api_load():
 # END data_api_load
 
 
-def data_model(*assets):
-    #MODEL FUNCTION
+##### MODEL ALL ASSETS LOADED INTO historic_data
+###
+#
+def data_model(*args):
     plt.rcParams.update({'figure.figsize': (9, 7), 'figure.dpi': 120})
     split = 80
-    maxlags = 6
+    maxlags = 10
 
-    conn = create_connection(database)
-    query = f"SELECT DISTINCT asset_id FROM historic_data"
-    if conn is not None:
-        result = pd.read_sql_query(query,conn)
+    print(f'*****************************************************************************************')
+    print(f'Cryptocurrency Price Prediction Modelling Program using Split: {split}/{100-split} and Maximum Lags: {maxlags}')
+
+    if len(args) <= 0:        
+        conn = create_connection(database)
+        query = f"SELECT DISTINCT asset_id FROM historic_data"
+        if conn is not None:
+            result = pd.read_sql_query(query,conn)
+        else:
+            print("Error! cannot create the database connection.")
+        conn.close()
     else:
-        print("Error! cannot create the database connection.")
-    conn.close()
+        result = pd.DataFrame({"asset_id" : []})
+        for i in args:
+            result = result.append({'asset_id': i}, ignore_index=True)       
 
     assets = result.copy()
 
-    for asset in assets['asset_id']:        
+    for asset in assets['asset_id']:
+        print(f'\nStarting ARIMA Prediction Model for Selected Currency:  {asset}\n')
+        
         try:
             os.makedirs(f'models/{asset}')
         except FileExistsError:
@@ -306,6 +345,8 @@ def data_model(*assets):
         df = result.copy()
 
         # DICKEY-FULLER TEST FOR TIME SERIES STATIONARITY, test if data series changes with time
+        print(f'     * {time.strftime("%H:%M:%S", time.localtime())} - Dickey-Fuller test..')
+        
         def test_stationarity(timeseries, window = 12, cutoff = 0.05):
             # Calculates rolling mean & standard deviation
             rolmean = timeseries.rolling(window).mean()
@@ -316,7 +357,7 @@ def data_model(*assets):
             mean = plt.plot(rolmean, color = 'red', label = 'Rolling Mean')
             std = plt.plot(rolstd, color = 'black', label = 'Rolling Std')
             plt.legend(loc = 'best')
-            plt.title(f'Rolling Mean & Standard Deviation: {asset}')
+            plt.title(f'Rolling Mean & Standard Deviation:  {asset}')
             plt.savefig(f'{path}{asset}_mean_std.png')
             plt.close()    
             # Performs dickey-fuller test for time-series statistics
@@ -335,8 +376,7 @@ def data_model(*assets):
         fuller_out, cutoff = test_stationarity(df['price_close'])
 
         df_fuller = pd.DataFrame(fuller_out)
-        df_fuller = df_fuller.rename(columns = {
-            0 : f'Dickey-Fuller Test Scores: {asset}'})
+        df_fuller = df_fuller.rename(columns = {0 : f'Dickey-Fuller Test Scores: {asset}'})
 
         if df_fuller.iloc[1][0] < cutoff: #If pvalue < 0.05, dataset is stationary
             df_fuller.loc['Data Stationary?'] = 'Yes'
@@ -351,12 +391,14 @@ def data_model(*assets):
         #     Randomness (data without a pattern)
         #     Serial correlation (where error terms in a time series transfer from one period to another)
         #     Seasonality (periodic fluctuations in time series data that happens at regular periods)
+        
+        print(f'     * {time.strftime("%H:%M:%S", time.localtime())} - Lag Test..')
 
         lags = int(df_fuller.loc['#Lags Used'][0])
         
         # plt.figure()
         lag_plot(df['price_close'], lag = lags)
-        plt.title(f'Lag of timeseries with lag = {lags}: {asset} (real)')
+        plt.title(f'Lag of timeseries with {lags} lags (real):  {asset}')
         plt.savefig(f'{path}{asset}_series_lag_real.png')
         plt.close()
 
@@ -367,9 +409,11 @@ def data_model(*assets):
 
         # plt.figure()
         lag_plot(df['price_close'], lag = lags)
-        plt.title(f'Lag of timeseries with lag = {lags}: {asset} (capped)')
+        plt.title(f'Lag of timeseries with {lags} lags (capped):  {asset}')
         plt.savefig(f'{path}{asset}_series_lag_capped.png')
         plt.close()
+        
+        print(f'     * {time.strftime("%H:%M:%S", time.localtime())} - Differencing..')
 
         # PLOTS d value first & second differentiation
         # Original Series
@@ -378,17 +422,19 @@ def data_model(*assets):
         plot_acf(df["price_close"].values, ax = axes[0, 1])
 
         # 1st Differencing
-        axes[1, 0].plot(np.diff(df["price_close"].values)); axes[1, 0].set_title('1st Order Differencing')
+        axes[1, 0].plot(np.diff(df["price_close"].values, n=1)); axes[1, 0].set_title('1st Order Differencing')
         df = df.dropna()
-        plot_acf(np.diff(df["price_close"].values), ax = axes[1, 1])
+        plot_acf(np.diff(df["price_close"].values, n=1), ax = axes[1, 1])
 
         # 2nd Differencing
-        axes[2, 0].plot(np.diff(df["price_close"].values)); axes[2, 0].set_title('2nd Order Differencing')
-        plot_acf(np.diff(df["price_close"].values), ax = axes[2, 1])
+        axes[2, 0].plot(np.diff(df["price_close"].values, n=2)); axes[2, 0].set_title('2nd Order Differencing')
+        plot_acf(np.diff(df["price_close"].values, n=2), ax = axes[2, 1])
 
         plt.suptitle(f'Differencing & Correlation: {asset}')
-        plt.savefig(f'{path}{asset}_1order_2order.png')
-        plt.close()    
+        plt.savefig(f'{path}{asset}_order1_order2.png')
+        plt.close()
+        
+        print(f'     * {time.strftime("%H:%M:%S", time.localtime())} - Creating Train & Test Data..')
 
         # CREATE TRAIN & TEST DATA FOR MODELLING
         train_data, test_data = df[0:int(len(df) * split / 100)], df[int(len(df) * split / 100):]
@@ -399,6 +445,8 @@ def data_model(*assets):
         history = [x for x in training_data]
         model_predictions = []
         N_test_observations = len(test_data)
+        
+        print(f'     * {time.strftime("%H:%M:%S", time.localtime())} - Creating Model..')
 
         # CREATE MODEL
         for time_point in range(N_test_observations):
@@ -413,6 +461,12 @@ def data_model(*assets):
         model_fit.save(f'{path}{asset}_model.smd')
 
         MSE_error = mean_squared_error(test_data, model_predictions)
+        RMSE = math.sqrt(MSE_error)
+
+        print(f'          * Mean Square Error: {MSE_error}')
+        print(f'          * Root Mean Square Error: {RMSE_error}')
+        
+        print(f'     * {time.strftime("%H:%M:%S", time.localtime())} - Actual & Predicted Values Forecast Differencing..')
 
         # CREATE DATAFRAME WITH DATES, ACTUAL & PREDICTED VALUES
         date_df = pd.DataFrame(df[int(len(df) * split / 100):].time_period_end)
@@ -431,13 +485,13 @@ def data_model(*assets):
 
         # Create Training and Test
         split = 85
-        train = df[0:int(len(df['price_close'])*split/100)].price_close
-        test = df[int(len(df['price_close'])*split/100):].price_close
+        train = df[0:int(len(df['price_close']) * split / 100)].price_close
+        test = df[int(len(df['price_close']) * split / 100):].price_close
 
         # Build Model
         # model = ARIMA(train, order=(2,1,0))  
         model = ARIMA(np.asarray(train), order = (2, 1, 0))  
-        fitted = model.fit(disp=0)  
+        fitted = model.fit(disp = 0)  
 
         # Forecast
         fc, se, conf = fitted.forecast(len(test), alpha = 0.05)  # 95% conf
@@ -454,14 +508,14 @@ def data_model(*assets):
         plt.plot(test, label = 'actual')
         plt.plot(fc_series, label = 'forecast')
         plt.fill_between(lower_series.index, lower_series, upper_series, color = 'k', alpha = 0.15)
-        plt.title(f'Forecast vs Actuals 1st Order: {asset}')
+        plt.title(f'Forecast vs. Actuals 1st Order: {asset}')
         plt.legend(loc='upper left', fontsize = 8)
         plt.savefig(f'{path}{asset}_oot_forecast_order1.png')
         plt.close()    
 
         #Build Model with Forecast
-        # model = ARIMA(train, order=(2,1,0))  
-        model = ARIMA(np.asarray(train), order = (3, 2, 0))  
+        # model = ARIMA(train, order=(3,2,1))  
+        model = ARIMA(np.asarray(train), order = (3, 2, 1))  
         fitted = model.fit(disp=0)  
 
         # Forecast
@@ -470,8 +524,8 @@ def data_model(*assets):
         # Make as pandas series
         fc_series = pd.Series(fc, index=test.index)
 
-        lower_series = pd.Series(conf[:, 0], index=test.index)
-        upper_series = pd.Series(conf[:, 1], index=test.index)
+        lower_series = pd.Series(conf[:, 0], index = test.index)
+        upper_series = pd.Series(conf[:, 1], index = test.index)
 
         # Plot
         plt.figure(figsize = (12,5), dpi = 100)
@@ -484,20 +538,16 @@ def data_model(*assets):
         plt.legend(loc = 'upper left', fontsize = 8)
         plt.savefig(f'{path}{asset}_oot_forecast_order2.png')
         plt.close()
-
 # END data_model
 
 #data_csv_load()
-data_api_load()
+#data_api_load()
 data_model()
 
 
-
-
-
-
-
-
+##### PLOTLY EXAMPLE
+###
+#
 
 # import plotly.express as px
 # import plotly.graph_objects as go
@@ -532,4 +582,3 @@ data_model()
 # )
 
 # fig.show()
-
