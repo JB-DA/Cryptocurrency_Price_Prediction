@@ -1,0 +1,65 @@
+*****************************************************************************************
+Cryptocurrency Price Prediction Modelling Program using Split: 80/20 and Maximum Lags: 10
+
+Starting ARIMA Prediction Model for Selected Currency:  brentoil
+
+     * 00:55:24 - Dickey-Fuller test..
+     * 00:55:26 - Lag Test..
+     * 00:55:27 - Differencing..
+     * 00:55:27 - Creating Train & Test Data..
+     * 00:55:27 - Creating Model..
+     * 00:55:39 - Actual & Predicted Values Forecast Differencing..
+
+Starting ARIMA Prediction Model for Selected Currency:  goldfutures
+
+     * 00:55:40 - Dickey-Fuller test..
+     * 00:55:42 - Lag Test..
+     * 00:55:43 - Differencing..
+     * 00:55:43 - Creating Train & Test Data..
+     * 00:55:43 - Creating Model..
+     * 01:25:55 - Actual & Predicted Values Forecast Differencing..
+
+Starting ARIMA Prediction Model for Selected Currency:  BTC
+
+     * 01:25:56 - Dickey-Fuller test..
+     * 01:25:58 - Lag Test..
+     * 01:25:59 - Differencing..
+     * 01:25:59 - Creating Train & Test Data..
+     * 01:25:59 - Creating Model..
+     * 03:49:25 - Actual & Predicted Values Forecast Differencing..
+
+Starting ARIMA Prediction Model for Selected Currency:  ETH
+
+     * 03:49:25 - Dickey-Fuller test..
+     * 03:49:27 - Lag Test..
+     * 03:49:27 - Differencing..
+     * 03:49:28 - Creating Train & Test Data..
+     * 03:49:28 - Creating Model..
+     * 04:03:51 - Actual & Predicted Values Forecast Differencing..
+
+Starting ARIMA Prediction Model for Selected Currency:  DOGE
+
+     * 04:03:52 - Dickey-Fuller test..
+     * 04:03:54 - Lag Test..
+     * 04:03:54 - Differencing..
+     * 04:03:55 - Creating Train & Test Data..
+     * 04:03:55 - Creating Model..
+     * 04:18:04 - Actual & Predicted Values Forecast Differencing..
+
+Starting ARIMA Prediction Model for Selected Currency:  LTC
+
+     * 04:18:04 - Dickey-Fuller test..
+     * 04:18:07 - Lag Test..
+     * 04:18:07 - Differencing..
+     * 04:18:08 - Creating Train & Test Data..
+     * 04:18:08 - Creating Model..
+     * 04:36:49 - Actual & Predicted Values Forecast Differencing..
+
+Starting ARIMA Prediction Model for Selected Currency:  XRP
+
+     * 04:36:50 - Dickey-Fuller test..
+     * 04:36:52 - Lag Test..
+     * 04:36:53 - Differencing..
+     * 04:36:53 - Creating Train & Test Data..
+     * 04:36:53 - Creating Model..
+     * 04:50:48 - Actual & Predicted Values Forecast Differencing..
