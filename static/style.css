@@ -1,0 +1,64 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:link {
+    color: #FFFFFF;
+}
+
+a:visited {
+    color: #FFFFFF;
+}
+
+a:hover {
+    color: #123456;
+    font-weight: bold;
+}
+
+a:active {
+    color: #123456;
+}
+
+.bios {
+    padding: 0;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 298px;
+    height: 399px;
+    border: 1px solid;
+}
+
+.card {
+    padding: 0;
+    display: block;
+    margin-left: auto;
+    margin-right: 40px;
+    width: 298px;
+    height: 399px;
+    border: 2px solid;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.4);
+    text-align: center;
+    float: left;
+}
+
+h1 {
+    font-family: ABeeZee;
+    font-size: 18px;
+}
+
+li {
+    font-family: Abel;
+    font-size: 15px;
+}
+
+p {
+    font-family: Abel;
+    font-size: 15px;
+}
