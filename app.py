@@ -33,6 +33,18 @@ def api_assets():
     con.close()
     return jsonify(json_assets)
 
+@app.route("/api/asset")
+def api_asset():
+
+    asset = request.args.get('asset')
+
+    con = sqlite3.connect("crypto_db.sqlite")
+    df = pd.read_sql_query(f"SELECT time_period_end, price_close from historic_data WHERE asset_id='{asset}'", con)
+    json_assets = json.loads(df.to_json(orient='records'))
+    #df_csv.to_sql("historic_trades", con, if_exists="replace")
+    con.close()
+    return jsonify(json_assets)
+
 @app.route("/api/volume1h")
 def api_vol1h():
 
