@@ -461,7 +461,7 @@ def data_model(*args):
         model_fit.save(f'{path}{asset}_model.smd')
 
         MSE_error = mean_squared_error(test_data, model_predictions)
-        RMSE = math.sqrt(MSE_error)
+        RMSE_error = math.sqrt(MSE_error)
 
         print(f'          * Mean Square Error: {MSE_error}')
         print(f'          * Root Mean Square Error: {RMSE_error}')
@@ -515,7 +515,7 @@ def data_model(*args):
 
         #Build Model with Forecast
         # model = ARIMA(train, order=(3,2,1))  
-        model = ARIMA(np.asarray(train), order = (3, 2, 1))  
+        model = ARIMA(np.asarray(train), order = (3, 2, 0))  
         fitted = model.fit(disp=0)  
 
         # Forecast
@@ -538,6 +538,8 @@ def data_model(*args):
         plt.legend(loc = 'upper left', fontsize = 8)
         plt.savefig(f'{path}{asset}_oot_forecast_order2.png')
         plt.close()
+
+        print(f'     * Finished {asset} model successfully.')
 # END data_model
 
 #data_csv_load()
