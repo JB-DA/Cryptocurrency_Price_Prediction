@@ -15,7 +15,6 @@ Machine learning can work through many problems, but its application in predicti
 * [Project Summary](#--project-summary--)
 * [Resources](#--resources--)
 * [Contributors](#--contributors--)
-* [Task List](#--task-list--)
 
 ##### **- SYNOPSIS-**
 
@@ -42,43 +41,5 @@ Sample Datasets:
 
 * Divya [@github](https://github.com/divyagururajansumangala)
 * JB [@github](https://github.com/JB-DA)
-
-##### **- TASK LIST -**
-
- - [x] Design Database
-	 - [x] Type
-	 - [x] ERD
-	 - [x] Schema
-	 - [x] Tables
-	 - [x] Columns
- 
- - [x] API calls for autonomous historical data collection
-	 - [x] Single item
-	 - [x] n items
-	 - [x] Error catching
-	 - [x] Storage of data
- 
- - [x] Data Cleaning 
- 
- - [x] Database Load
-	- [x] Append/Overwrite
- 
- - [ ] Flask app for calling of data
-	 - [ ] Routes
-	 - [ ] Pages 
- 
-- [ ] Machine Learning Component
-	- [ ] Data load
-	- [ ] Data summary
-	- [ ] Data visualise
-	- [ ] Algorithm
-	- [ ] Predictions
-
- - [ ] Webpage
-	 - [ ] Layout
-	 - [ ] Colour Scheme
-	 - [ ] Menus
-	 - [ ] Visualisations
-
 
 
