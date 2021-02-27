@@ -1,4 +1,4 @@
-let chartURL = "/api/api_assets";
+let assetlist = "/api/api_assets";
 let vol_1h = "/api/volume1h";
 let vol_1d = "/api/volume1d";
 let vol_1m = "/api/volume1m";
@@ -7,7 +7,7 @@ function initdropdown() {
 
     var dropdown = d3.select("#selDataset");
 
-    d3.json(chartURL).then((d) => {
+    d3.json(assetlist).then((d) => {
         d.forEach(function (id, index) {
             dropdown.append("option").text(id.asset_id).property("value", id.asset_id);
         });
