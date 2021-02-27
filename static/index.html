@@ -1,57 +1,21 @@
 <html> 
 	<head> 
 		<title>Cryptocurrency Dashboard</title>		 
-		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abel"> 
-		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=ABeeZee"> 
-		<link rel="stylesheet" href="../static/style.css"> 
-		<link rel="icon" href="data:,"> 
 	</head>	 
 	<body> 
-		<table style="height: 100%;
-    width: 100%;
-    border-collapse: collapse;" border="0" cellspacing="0" cellpadding="0"> 
-			<tbody> 
-				<tr> 
-					<td colspan="3" style="height: 30px;
-    padding: 10px;
-    font-family: Abel;
-    font-size: 14px;
-    background-color: #0695d6;
-    color: #ffffff;
-    letter-spacing: 3px;">&nbsp;&nbsp;
-						<a href="/">&nbsp;DASHBOARD</a>
-					</td>					 
-				</tr>				 
-				<tr> 
-					<td style="width: 50px;">&nbsp;</td> 
-					<td> 
-						<table border="0" style="vertical-align: text-top; object-fit: fill; width: 100%; height: 100%;"> 
-							<tr> 
-								<td height="50px"> 
-									<select id="selDataset" placeholder="Pick a coin" style="float: right;"> 
-										<!-- Use coins.js to load values here from API call -->										 
-									</select>									 
-								</td>								 
-							</tr>							 
-							<tr> 
-								<td> 
-									<div id="mainchartdiv"></div>									 
-								</td>								 
-							</tr>							 
-						</table>						 
-					</td>					 
-					<td style="width: 50px;">&nbsp;</td> 
-				</tr>				 
-				<tr> 
-					<td colspan="3" style="height: 30px;
-    font-family: Abel;
-    text-align: right;
-    font-size: 12px;
-    padding: 9px;
-    background-color: #c3c3c3;">© 2020 Some people&nbsp; &nbsp; Privacy &amp; cookies&nbsp; &nbsp; Terms of use&nbsp;
-                    &nbsp; Contact us</td> 
-				</tr>				 
-			</tbody>			 
-		</table>		  
+		<table border="0" style="vertical-align: text-top; object-fit: fill; width: 100%; height: 100%;"> 
+			<tr> 
+				<td height="50px"> 
+					<select id="selDataset" placeholder="Pick a coin" style="float: right;"> 
+						<!-- Use coins.js to load values here from API call -->										 
+					</select>									 
+				</td>								 
+			</tr>							 
+			<tr> 
+				<td> 
+					<div id="mainchartdiv"></div>									 
+				</td>								 
+			</tr>							 
+		</table>						 	  
 		<script src='../static/js/assets.js'></script>		 
 	</body>

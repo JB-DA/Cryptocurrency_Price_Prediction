@@ -6,21 +6,9 @@ from sqlalchemy import create_engine
 import pandas as pd
 import json
 
-
-# DATABASE SETUP
-###
-#
-
-# FLASK SETUP
-###
-#
 app = Flask(__name__, template_folder='static', static_folder='static')
 
-
 # ROUTES
-###
-#
-# API Pages
 @app.route("/api/assets")
 def api_assets():
 
@@ -33,16 +21,12 @@ def api_assets():
     con.close()
     return jsonify(json_assets)
 
-
 # HTML PAGES
 @app.route('/')
 def index():
     return render_template('index.html')
 
-
 # RUN APP
-###
-#
 if __name__ == '__main__':
     app.config['TEMPLATES_AUTO_RELOAD'] = True
     app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
