@@ -2,6 +2,5 @@
 *.lnk
 *checkpoint*
 *pycache*
-*dev*
 .vscode
 *~$*
