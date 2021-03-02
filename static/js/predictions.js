@@ -1,5 +1,7 @@
 let assetlist = "/api/assets";
 
+
+
 function initdropdown() {
 
     var dropdown = d3.select("#selDataset");

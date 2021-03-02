@@ -1,64 +1,41 @@
+.navbar {
+    width: 100px;
+    height: 100%;
+    background-color: #696969;
+    padding: 10px;
+}
+
 html,
 body {
+    width: 100%;
+    height: 100%;
     margin: 0;
     padding: 0;
 }
 
-a {
-    text-decoration: none;
-}
-
-a:link {
-    color: #FFFFFF;
-}
-
-a:visited {
-    color: #FFFFFF;
-}
-
-a:hover {
-    color: #123456;
-    font-weight: bold;
-}
-
-a:active {
-    color: #123456;
-}
-
-.bios {
-    padding: 0;
+.graphdiv {
+    width: 80%;
+    height: 50%;
     display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 298px;
-    height: 399px;
-    border: 1px solid;
+    vertical-align: top;
+    float: right;
 }
 
-.card {
-    padding: 0;
-    display: block;
-    margin-left: auto;
-    margin-right: 40px;
-    width: 298px;
-    height: 399px;
-    border: 2px solid;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.4);
-    text-align: center;
-    float: left;
+select {
+    float: right;
 }
 
-h1 {
-    font-family: ABeeZee;
-    font-size: 18px;
+.image-wrapper {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
 }
 
-li {
-    font-family: Abel;
-    font-size: 15px;
-}
-
-p {
-    font-family: Abel;
-    font-size: 15px;
+.image-wrapper .image {
+    width: 110%;
+    height: 110%;
+    margin: -15px;
+    filter: blur(8px);
+    -webkit-filter: blur(8px);
+    filter: brightness(100%);
 }

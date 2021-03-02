@@ -1,26 +1,25 @@
-<html> 
-	<head> 
-		<title>Cryptocurrency Dashboard</title>
-
-	</head>	 
-	<body> 
-		<table border="0" style="vertical-align: text-top; object-fit: fill; width: 100%; height: 100%;"> 
-			<tr> 
-				<td height="50px"> 
-					<select id="selDataset" placeholder="Pick a coin" style="float: right;"> 
-						<!-- Use assets.js to load values here from API call -->										 
-					</select>									 
-				</td>								 
-			</tr>							 
-			<tr> 
-				<td> 
-					<div id="mainchartdiv"></div>									 
-				</td>								 
-			</tr>							 
-		</table>
-		<script src="https://d3js.org/d3.v5.js"></script> 					 	  
-		<script src='../static/js/assets.js'></script>		 
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<title>New page</title>
+		<!--link href="/static/style.css" rel="stylesheet"-->
+		<link href="style.css" rel="stylesheet">
+	</head>
+	<body>
+		<div class="image-wrapper">
+			<img src="images/bgs/cropped-instant-cryptocurrency-exchange-background.jpg" class="image"/>
+		</div>
+		<select id="selDataset"></select>
+		<div class="navbar">
+			<a href="predictions.html">Predictions</a>
+		</div>
+		<div class="graphdiv" id="mainchartdiv"></div>
+		<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+		<script src="/static/js/d3.min.js"></script>
+		<script src="/static/js/assets.js"></script>
 	</body>
-
-
-	
+</html>
